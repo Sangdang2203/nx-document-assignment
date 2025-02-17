@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
@@ -272,31 +273,33 @@ export default function FolderDetail() {
                   return (
                     <TableRow
                       hover
-                      tabIndex={-1}
                       key={row.id}
-                      sx={{ cursor: 'pointer' }}
+                      sx={{ cursor: 'pointer', width: 1000 }}
                     >
                       <TableCell
                         padding="normal"
-                        width={300}
                         sx={{ textTransform: 'capitalize' }}
                       >
                         {row.title}
                       </TableCell>
 
-                      {/* <TableCell padding="normal" width={500}>
-                        <MarkdownRenderer content={row.content} />
-                      </TableCell> */}
-
-                      <TableCell padding="normal" width={150}>
+                      <TableCell padding="normal">
                         {moment(row.createdAt).format('YYYY-MM-DD')}
                       </TableCell>
 
-                      <TableCell padding="normal" width={150}>
+                      <TableCell padding="normal">
                         {moment(row.updatedAt).format('YYYY-MM-DD')}
                       </TableCell>
 
-                      <TableCell padding="normal" width={50}>
+                      <TableCell
+                        padding="normal"
+                        width={300}
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
                         <DetailDocument folderId={''} documentId={row.id} />
 
                         <DocumentFormModal

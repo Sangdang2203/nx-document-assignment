@@ -150,7 +150,7 @@ export function NxWelcome({ title }: { title: string }) {
                 }}
               >
                 <EventNoteIcon fontSize="large" color="primary" />
-                <Typography variant="h5">Recently Activities</Typography>
+                <Typography variant="h5">Recently History</Typography>
                 <Typography variant="h2">{history.length}</Typography>
                 <Typography variant="body2">
                   Stay updated with recent activities.

@@ -276,6 +276,7 @@ export default function DocumentFormModal({
               />
             )}
           />
+
           <Controller
             name="content"
             control={control}

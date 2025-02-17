@@ -12,10 +12,9 @@ import {
   TableSortLabel,
   Chip,
 } from '@mui/material';
-import moment from 'moment';
-import DetailDocument from '../documents/DocumentDetail';
-import { visuallyHidden } from '@mui/utils';
 import React from 'react';
+import moment from 'moment';
+import { visuallyHidden } from '@mui/utils';
 import { Order } from '../../methods';
 import Loading from '../../components/Loading';
 import BackButton from '../../components/BackButton';

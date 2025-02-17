@@ -22,14 +22,9 @@ import { BASE_API_URL } from '../../constants';
 interface Props {
   folders: Folder[];
   setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function FolderFormModal({
-  folders,
-  setFolders,
-  setPage,
-}: Props) {
+export default function FolderFormModal({ folders, setFolders }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const folderSchema = z.object({
@@ -43,7 +38,8 @@ export default function FolderFormModal({
       .refine(
         (name) =>
           !folders.some(
-            (folder) => folder.name.toLowerCase() === name.toLowerCase()
+            (folder) =>
+              folder.name.trim().toLowerCase() === name.trim().toLowerCase()
           ),
         {
           message: 'Folder name already exists',
@@ -96,7 +92,6 @@ export default function FolderFormModal({
       toast.success('Folder was created successfully!', {
         autoClose: 5000,
       });
-      setPage(0);
       handleClose();
     }
   };
@@ -129,7 +124,7 @@ export default function FolderFormModal({
                 error={!!errors.folderName}
                 helperText={errors.folderName ? errors.folderName.message : ''}
                 autoFocus
-                defaultValue={''}
+                defaultValue=""
                 margin="dense"
                 id="folderName"
                 label="Folder Name"

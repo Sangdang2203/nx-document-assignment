@@ -40,5 +40,21 @@ body {
   background-size: cover;
 }
 
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+  
+}
+
+tr {
+  display: table; 
+  width: 100%; 
+  
+}
+
+td {
+  width: auto; 
+}
+
 
 

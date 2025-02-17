@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { toast } from 'react-toastify';
 import {
@@ -14,6 +15,7 @@ import { CloseOutlined, RemoveRedEyeOutlined } from '@mui/icons-material';
 
 import { BASE_API_URL } from '../../constants';
 import { Document } from '../../interfaces';
+import MarkdownRenderer from '../../components/MarkDownRender';
 
 interface Props {
   folderId: string;
@@ -77,11 +79,11 @@ export default function DocumentDetail({ folderId, documentId }: Props) {
             </Tooltip>
           </DialogTitle>
           <DialogContent sx={{ minWidth: 600 }}>
-            <Box>
+            <Box sx={{ textAlign: 'center' }}>
               <Box component="h2" mb={2} sx={{ textTransform: 'capitalize' }}>
-                Title: {document?.title}
+                Title: {document.title}
               </Box>
-              <p>Content: {document?.content}</p>
+              <MarkdownRenderer content={document.content} />
             </Box>
           </DialogContent>
           <DialogActions
