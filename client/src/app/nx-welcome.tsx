@@ -10,15 +10,12 @@ import {
   Grid,
   Paper,
   Button,
-  Tooltip,
 } from '@mui/material';
 import { BASE_API_URL } from '../constants';
 import TheFooterComponent from '../components/TheFooter';
 import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Introduction from '../components/Introdution';
 
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
