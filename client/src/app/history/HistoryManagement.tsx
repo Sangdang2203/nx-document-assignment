@@ -154,7 +154,7 @@ export default function HistoryManagement() {
             {loading ? (
               <TableBody>
                 <TableRow>
-                  <TableCell colSpan={4} sx={{ textAlign: 'center' }}>
+                  <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
                     <Loading />
                   </TableCell>
                 </TableRow>
@@ -163,7 +163,7 @@ export default function HistoryManagement() {
               <TableBody>
                 {documents.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={4} sx={{ textAlign: 'center' }}>
+                    <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
                       No available data!
                     </TableCell>
                   </TableRow>

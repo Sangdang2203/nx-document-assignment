@@ -6,6 +6,7 @@ export default function TheFooterComponent() {
       style={{
         position: 'fixed',
         bottom: 0,
+        zIndex: 0,
       }}
     >
       <p>© 2024 — Copyright</p>

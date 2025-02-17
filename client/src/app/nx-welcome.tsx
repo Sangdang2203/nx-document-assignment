@@ -104,7 +104,14 @@ export function NxWelcome({ title }: { title: string }) {
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
-              <Paper sx={{ padding: 2, textAlign: 'center', borderRadius: 2 }}>
+              <Paper
+                sx={{
+                  padding: 2,
+                  textAlign: 'center',
+                  borderRadius: 2,
+                  minHeight: 230,
+                }}
+              >
                 <FolderIcon fontSize="large" color="primary" />
                 <Typography variant="h5">Folders</Typography>
                 <Typography variant="h2">{folders.length}</Typography>
@@ -117,20 +124,31 @@ export function NxWelcome({ title }: { title: string }) {
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Paper sx={{ padding: 2, textAlign: 'center', borderRadius: 2 }}>
+              <Paper
+                sx={{
+                  padding: 2,
+                  textAlign: 'center',
+                  borderRadius: 2,
+                  minHeight: 230,
+                }}
+              >
                 <DescriptionIcon fontSize="large" color="primary" />
                 <Typography variant="h5">Documents</Typography>
                 <Typography variant="h2">{documents}</Typography>
                 <Typography variant="body2">
                   Keep track of your documents.
                 </Typography>
-                <Button variant="text" color="info" href="/documents">
-                  More Detail
-                </Button>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Paper sx={{ padding: 2, textAlign: 'center', borderRadius: 2 }}>
+              <Paper
+                sx={{
+                  padding: 2,
+                  textAlign: 'center',
+                  borderRadius: 2,
+                  minHeight: 230,
+                }}
+              >
                 <EventNoteIcon fontSize="large" color="primary" />
                 <Typography variant="h5">Recently Activities</Typography>
                 <Typography variant="h2">{history.length}</Typography>
