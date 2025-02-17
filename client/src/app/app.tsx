@@ -1,5 +1,3 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.css';
 import NxWelcome from '../app/nx-welcome';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import FolderDetail from '../app/folders/FolderDetail';
