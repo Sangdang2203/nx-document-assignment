@@ -2,6 +2,11 @@
 
 import React from 'react';
 import { toast } from 'react-toastify';
+import { BASE_API_URL } from '../constants';
+import TheFooterComponent from '../components/TheFooter';
+import FolderIcon from '@mui/icons-material/Folder';
+import DescriptionIcon from '@mui/icons-material/Description';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 import {
   Container,
   AppBar,
@@ -11,19 +16,6 @@ import {
   Paper,
   Button,
 } from '@mui/material';
-import { BASE_API_URL } from '../constants';
-import TheFooterComponent from '../components/TheFooter';
-import FolderIcon from '@mui/icons-material/Folder';
-import DescriptionIcon from '@mui/icons-material/Description';
-import EventNoteIcon from '@mui/icons-material/EventNote';
-
-/*
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- This is a starter component and can be deleted.
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- Delete this file and get started with your project!
- * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
 export function NxWelcome({ title }: { title: string }) {
   const [folders, serFolders] = React.useState([]);
   const [documents, setDocuments] = React.useState<number>(0);

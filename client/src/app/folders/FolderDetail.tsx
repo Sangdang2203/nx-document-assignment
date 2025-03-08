@@ -16,7 +16,6 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
-  Typography,
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { Search } from '@mui/icons-material';
@@ -201,10 +200,7 @@ export default function FolderDetail() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h4" sx={{ m: 4 }}>
-        Documents in folder
-      </Typography>
-      <Paper sx={{ m: 4 }}>
+      <Paper sx={{ m: 4, minHeight: '90vh' }}>
         <Box
           sx={{
             display: 'flex',

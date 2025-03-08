@@ -18,7 +18,7 @@ export function App() {
         <Route path="/folders/:folderId" element={<FolderDetail />} />
         <Route path="/history" element={<HistoryManagement />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </Router>
   );
 }

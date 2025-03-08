@@ -4,42 +4,48 @@ import {
   Box,
   IconButton,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TableSortLabel,
   Input,
-  Tooltip,
   Typography,
-  Menu,
   MenuItem,
+  Divider,
 } from '@mui/material';
-import { visuallyHidden } from '@mui/utils';
-import { Search, Description } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
 import FolderIcon from '@mui/icons-material/Folder';
 
 import { Folder } from '../../interfaces';
 import { BASE_API_URL } from '../../constants';
-import { getComparator, Order } from '../../methods';
 import Loading from '../../components/Loading';
 import FolderFormModal from './FolderFormModal';
+import StyledMenu from '../../components/StyleMenu';
 import BackButton from '../../components/BackButton';
+import PagingComponent from '../../components/Pagination';
 import ConfirmDeleteModal from '../../components/ConfirmDeleteModal';
+
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import MoreVertSharpIcon from '@mui/icons-material/MoreVertSharp';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export default function FolderManagement() {
   const [loading, setLoading] = React.useState(true);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [folders, setFolders] = React.useState<Folder[]>([]);
   const [filteredFolders, setFilteredFolders] = React.useState<Folder[]>([]);
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Folder>('name');
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [foldersPerPage] = React.useState(25);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const navigation = useNavigate();
+  const indexOfLast = currentPage * foldersPerPage;
+  const indexOfFirst = indexOfLast - foldersPerPage;
+  const currentProjects = filteredFolders.slice(indexOfFirst, indexOfLast);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -48,8 +54,6 @@ export default function FolderManagement() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const navigation = useNavigate();
 
   const getFolders = async () => {
     const response = await fetch(`${BASE_API_URL}/folders`, {
@@ -76,21 +80,13 @@ export default function FolderManagement() {
     }
   };
 
-  const visibleRows = React.useMemo(
-    () => [...filteredFolders].sort(getComparator(order, orderBy)),
-    [filteredFolders, order, orderBy]
-  );
-
   React.useEffect(() => {
     getFolders();
   }, []);
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant="h4" sx={{ m: 4 }}>
-        Folder Management
-      </Typography>
-      <Paper sx={{ m: 4, minHeight: 600 }}>
+      <Paper sx={{ m: 4, minHeight: '90vh' }}>
         <Box
           sx={{
             display: 'flex',
@@ -132,13 +128,14 @@ export default function FolderManagement() {
             <Loading />
           </div>
         ) : (
+          //list of folders
           <div>
-            {visibleRows.length === 0 && (
+            {currentProjects.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
                 No available data!
               </Typography>
             )}
-            {visibleRows.reverse().map((row, index) => {
+            {currentProjects.reverse().map((row, index) => {
               if (index % 5 === 0) {
                 return (
                   <div
@@ -148,7 +145,7 @@ export default function FolderManagement() {
                       padding: 10,
                     }}
                   >
-                    {visibleRows.slice(index, index + 5).map((folder) => (
+                    {currentProjects.slice(index, index + 5).map((folder) => (
                       <div
                         key={folder.id}
                         style={{
@@ -163,16 +160,27 @@ export default function FolderManagement() {
                         title={`Go to the ${folder.name} folder`}
                       >
                         <IconButton title="Actions" onClick={handleClick}>
-                          <MoreVertSharpIcon />
+                          <MoreVertSharpIcon color="inherit" />
                         </IconButton>
-                        <Menu
+                        <StyledMenu
+                          id="menu-actions"
                           anchorEl={anchorEl}
-                          open={Boolean(anchorEl)}
+                          open={open}
                           onClose={handleClose}
                         >
                           <MenuItem
-                            sx={{ display: 'flex', alignItems: 'center' }}
+                            onClick={() => navigation(`/folders/${folder.id}`)}
+                            sx={{ maxHeight: 40 }}
+                            disableRipple
                           >
+                            <FolderOpenIcon />
+                            <p>Open</p>
+                          </MenuItem>
+                          <MenuItem sx={{ maxHeight: 40 }} disableRipple>
+                            <DriveFileRenameOutlineIcon />
+                            <p>Rename</p>
+                          </MenuItem>
+                          <MenuItem disableRipple>
                             <ConfirmDeleteModal
                               folderId={row.id}
                               documentId={''}
@@ -190,11 +198,9 @@ export default function FolderManagement() {
                                 handleClose();
                               }}
                             />
-                            <Tooltip title="Press icon to delete">
-                              <p>Delete</p>
-                            </Tooltip>
                           </MenuItem>
-                        </Menu>
+                          <Divider sx={{ my: 0.5 }} />
+                        </StyledMenu>
 
                         <div
                           style={{ display: 'flex', alignItems: 'center' }}
@@ -216,6 +222,25 @@ export default function FolderManagement() {
             })}
           </div>
         )}
+        {/* Paging */}
+        <Box
+          sx={{
+            position: 'fixed',
+            bottom: 0,
+            marginY: 8,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <PagingComponent
+            data={folders}
+            rowPerPage={foldersPerPage}
+            page={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </Box>
       </Paper>
     </Box>
   );

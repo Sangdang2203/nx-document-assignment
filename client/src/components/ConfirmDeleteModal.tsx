@@ -4,8 +4,7 @@ import {
   Dialog,
   DialogActions,
   DialogTitle,
-  IconButton,
-  Tooltip,
+  Link,
   Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -88,11 +87,19 @@ export default function ConfirmDeleteModal({
   };
   return (
     <div>
-      <Tooltip title="Delete" placement="right">
-        <IconButton onClick={handleClickOpen}>
-          <DeleteIcon color="error" fontSize="medium" />
-        </IconButton>
-      </Tooltip>
+      <Link
+        onClick={handleClickOpen}
+        style={{
+          textDecoration: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          maxHeight: 25,
+          color: '#333',
+        }}
+      >
+        <DeleteIcon color="error" fontSize="medium" />
+        <p>Delete</p>
+      </Link>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle style={{ textAlign: 'center' }}>
           <Typography maxWidth={350}>
